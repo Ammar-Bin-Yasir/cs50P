@@ -1,0 +1,17 @@
+from bank import value
+
+def test_value_0():
+    assert value("hello") == 0
+
+
+def test_value_20():
+    assert value("hoa") == 20
+    assert value("hey what's up!") == 20
+    assert value("hI") == 20
+    assert value("hEY!") == 20
+
+
+def test_value_100():
+    assert value("brosky") == 100
+    assert value("what's up boi") == 100
+    assert value("Im batman") == 100
