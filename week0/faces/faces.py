@@ -1,3 +1,5 @@
+# This program converts text emoticons into emoji.
+
 def main():
     text = input()
     new_txt = convert(text)

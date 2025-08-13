@@ -1,3 +1,4 @@
+# gets the percentage of fuel in a tank
 
 # Prompt user for a fraction (X/Y)
 # Keep prompting of invalid value

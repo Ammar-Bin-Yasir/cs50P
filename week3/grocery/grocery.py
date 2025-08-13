@@ -1,3 +1,5 @@
+# Its a grocery list, just enter a grocery item
+
 # dict to store all the items
 items = {}
 

@@ -1,3 +1,5 @@
+# corrects the date formats
+
 months = [
     "January",
     "February",
