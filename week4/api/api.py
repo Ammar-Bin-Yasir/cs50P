@@ -1,6 +1,6 @@
 # playing with apis
 
-from myfunctions import get_artworks, get_artists
+from museam.myfunctions import get_artworks, get_artists
 
 def main():
     artist = input("Artist: ")
