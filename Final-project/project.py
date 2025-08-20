@@ -33,7 +33,7 @@ pygame.init()
 
 # mixer module for sounds
 pygame.mixer.init()
-pygame.mixer.music.load("/mnt/c/Ammar/CS50/Final-Project/Static/Sounds/game-background-sound.ogg")
+pygame.mixer.music.load("/home/ammar/Cs50/cs50P/Final-project/Sound Effects/game-music-loop-6-144641.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
 
