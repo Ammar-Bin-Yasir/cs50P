@@ -1,5 +1,0 @@
-pygame
-numpy
-math
-random
-sys

@@ -1,39 +1,132 @@
-# Connect Four Game against AI Bot
-#### Video Demo: https://youtu.be/iIkvXqwWUhI
-#### Description:
-            This is a Connect Four game for player vs AI!
-            the game enviroment is created using pygame,sys and the AI bot is made using numpy, random, math libraries. I started by defining some constants such as the board dimensions, screen size, colours etc.
+# Connect Four - Player vs AI
 
-            main():
-            This function makes a 2D array to represent the Game board with values like [0(empty), 1(player coin), 2(AI coin)], then I initialized the pygame engine, I displayed the game screen and setuped its background. Then I called the draw_board function which darws a board based on the 2D array. Then I tracked user movements in a while True loop with an condition, If it is player's turn then:
-                we showed the coin one mouse however when It was just about to be droped
-                we detected when player clicks a coulmn
-                placed the piece in the lowest available row in that coulmn.
-                Check condition for win, if player wins then desplay a message and end the game else pass the control to AI
-            for the AI's moves:
-                we did the similar thing and implemented an minimax algorithm to check for the best move, after AI's move I checked again for the win condition, and If AI won, stop the game and print AI wins on the screen else give the turn to the player
+A strategic Connect Four game featuring an AI opponent powered by the minimax algorithm with alpha-beta pruning.
 
+## Features
 
-            draw_board():
-            loopes over the rows and columns to draw the board by calling pygame.draw.react and pygame.draw.circle. I made a transparent serface and then draw the circle on to that and then place that serface on screen using blit to reduce the pixelated look of the circle
-            
-            create_board():
-            this function creates a 2D array to represent the board
+- **Player vs AI Gameplay**: Compete against an intelligent AI opponent
+- **Optimized AI Engine**: Uses minimax algorithm with alpha-beta pruning for efficient decision-making
+- **Visual Board**: Real-time graphics rendering with Pygame
+- **Background Music**: Immersive audio accompaniment during gameplay
+- **Difficulty Level**: Configurable AI search depth (default: 4)
 
-            print_board(board):
-            this function prints the board at the console. I filped the board with np.flip to ensure that the rows are filled bottom up
+## How to Play
 
-            drop_piece(board, row, col, piece):
-            drops the piece(RED_COIN || YELLOW_COIN) at the board[row][col] place
+1. **Installation**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-            is_valid_location(board, col):
-            this function see's if there is space in the coulmn that the player clicked
+2. **Running the Game**:
+   ```bash
+   python project.py
+   ```
 
-            get_next_open_row(board, col):
-            loops through the row which the player clicked to find it's bottom most empty row/cell
+3. **Gameplay**:
+   - Move your mouse over the board to preview your move
+   - Click to drop your piece (RED) in the selected column
+   - The AI (YELLOW) automatically plays its turn
+   - First player to connect 4 pieces horizontally, vertically, or diagonally wins!
 
-            winning_move(board, piece):
-            I used an if condition to match the board[row][col] with piece in a loop for every possible way of winning and returned true if condition is met
+## Game Architecture
 
-            Minimax:
-            The thing I am most excited about in this project is the Minimax Algorithm of AI bot. The AI Bot uses the Minimax Algorithm which given any game state, optimally solves every outcome and assigns a numerical score to the end state, then the algorithm based on its configuration, tires to maximies its numerical value and in turn makes the best moves or vice virsa.
+### Main Game Loop (`main()`)
+- Initializes Pygame and the game board
+- Handles player input via mouse events
+- Manages AI turn execution
+- Implements win condition detection
+- Displays game status and results
+
+### Board Management
+- **`create_board()`**: Creates an empty 6x7 game board
+- **`drop_piece()`**: Places a piece at the specified position
+- **`is_valid_location()`**: Validates column availability
+- **`get_next_open_row()`**: Finds the lowest empty row in a column
+- **`print_board()`**: Console output for debugging
+
+### Graphics Rendering
+- **`draw_board()`**: Renders the game board with pieces using Pygame
+- Smooth circle rendering with proper coordinate mapping
+- Real-time display updates
+
+### AI Engine - Minimax Algorithm
+The AI uses the minimax algorithm with alpha-beta pruning for optimal move selection:
+
+- **`minimax()`**: Core recursive function that explores game trees to a specified depth
+- **`score_position()`**: Evaluates board positions using strategic heuristics
+- **`evaluate_window()`**: Scores 4-piece windows for pattern recognition
+- **`is_terminal_node()`**: Detects game-ending conditions
+
+#### Strategic Scoring
+- Center column preference (×3 multiplier for piece count)
+- Horizontal/vertical/diagonal pattern recognition
+- Offensive scoring: rewards potential wins
+- Defensive scoring: blocks opponent threats
+- Draws are scored as neutral
+
+### Win Detection
+- **`winning_move()`**: Checks all possible 4-in-a-row configurations
+  - Horizontal lines
+  - Vertical lines
+  - Positive-slope diagonals
+  - Negative-slope diagonals
+
+## Configuration
+
+Edit these constants in `project.py` to customize gameplay:
+
+```python
+AI_DIFFICULTY = 4          # Search depth (higher = stronger AI, slower)
+WINDOW_LENGTH = 4          # Winning condition (4 in a row)
+MUSIC_VOLUME = 0.5         # Background music volume (0.0-1.0)
+GAME_OVER_DELAY_MS = 3000  # Delay before quit after game ends (ms)
+```
+
+## Dependencies
+
+- **pygame-ce** (2.5.0+): Graphics and audio rendering
+- **numpy** (1.20.0+): Efficient board state management
+
+## Testing
+
+Run the unit test suite:
+```bash
+python -m unittest test_project
+```
+
+Tests cover:
+- Board creation and piece placement
+- Win condition detection (horizontal, vertical, diagonal)
+- Valid location checking
+- AI evaluation functions
+- Game configuration validation
+
+## Technical Details
+
+### Algorithm Complexity
+- **Time**: O(b^d) where b is branching factor (~7) and d is depth (4)
+- **Space**: O(d) for recursion stack
+- **Alpha-Beta Pruning**: Reduces nodes evaluated by ~50-70%
+
+### Performance Optimizations
+- Alpha-beta pruning eliminates unnecessary branches
+- Board copying for state exploration
+- Integer piece representation (0, 1, 2)
+- NumPy arrays for efficient board operations
+
+## Future Enhancements
+
+- Difficulty selection UI
+- Game history/replay
+- Networked multiplayer
+- Opening book optimization
+- Transposition table caching
+- Enhanced visual effects
+
+## Author Notes
+
+The minimax algorithm with alpha-beta pruning is the highlight of this project. It enables the AI to play optimally while maintaining responsive gameplay even at depth 4. The scoring heuristics provide strategic positioning awareness beyond simple win/loss detection.
+
+## License
+
+CS50P Final Project
